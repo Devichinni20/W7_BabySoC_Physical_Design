@@ -167,8 +167,8 @@ Initial Steps:
   - The `lib` folder would contain the files `avsddac.lib` and `avsdpll.lib`
 - Now copy the constraints file(`vsdbabysoc_synthesis.sdc`) from the VSDBabySoC folder in your system into this directory.
 - Now copy the files(`macro.cfg` and `pin_order.cfg`) from the VSDBabySoC folder in your system into this directory.
-  
-   ```bash
+
+ ```bash
     OpenROAD-flow-scripts/
  └── flow/
      └── designs/
@@ -209,13 +209,15 @@ cp ~/Desktop/VSDBabySoC/src/layout_conf/vsdbabysoc/pin_order.cfg /workspaces/vsd
 ```
 Step2-
 - Now, create a `config.mk` file whose contents are shown below:
+  
 1️⃣ In the Codespaces file explorer (left sidebar), navigate to:
+```bash
 OpenROAD-flow-scripts
 └── flow
 └── designs
 └── sky130hd
 └── vsdbabysoc
-
+```
 2️⃣ Inside the **vsdbabysoc** folder, click **“New File”**.
 
 3️⃣ Name the file:
