@@ -282,6 +282,7 @@ export SKIP_GATE_CLONING = 1
 <img width="1920" height="825" alt="Screenshot (448)" src="https://github.com/user-attachments/assets/7fe35dba-492e-432f-b186-7fb2da0afafd" />
 
 <img width="1850" height="907" alt="Screenshot (450)" src="https://github.com/user-attachments/assets/abefed0b-6939-4d93-b08a-52daf01efbc7" />
+<img width="1507" height="726" alt="Screenshot (459)" src="https://github.com/user-attachments/assets/e970ce82-2286-4241-a6f5-f1a9efdbc26a" />
 
 ### 📂 Adding VSDBabySoC Verilog Files to OpenROAD
  1. create the following directory inside your Codespace:
@@ -359,6 +360,8 @@ which explains why default target = full flow.
  make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk
 designs/sky130hd/vsdbabysoc/config.mk:11: *** missing separator (did you mean TAB instead of 8 spaces?).  Stop.
 ```
+<img width="1519" height="672" alt="Screenshot (455)" src="https://github.com/user-attachments/assets/7ad8a51b-9977-4b1e-a9d1-d5bea3597ac8" />
+
 This error 100% means your config.mk has spaces instead of a TAB on line 11.
 Makefiles strictly require TAB before every command.
 
