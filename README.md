@@ -667,9 +667,179 @@ read_db 2_1_floorplan.odb    -> in the tcl command inside gui
 
 ```
 
+### CTS-FINAL REPORT
+```bash
 
+vscode@codespaces-f73089:/workspaces/vsd-pd$ cd /workspaces/vsd-pd/OpenROAD-flow-scripts/flow
+vscode@codespaces-f73089:/workspaces/vsd-pd/OpenROAD-flow-scripts/flow$ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk 
+/workspaces/vsd-pd/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+read_liberty /workspaces/vsd-pd/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/vsdbabysoc/base/4_cts.odb
+[INFO DRT-0149] Reading tech and libs.
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
 
+Units:                1000
+Number of layers:     13
+Number of macros:     443
+Number of vias:       30
+Number of viarulegen: 25
 
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net571 has 148 pins which may impact routing performance. Consider optimization.
+
+Design:                   vsdbabysoc
+Die area:                 ( 0 0 ) ( 1600000 1600000 )
+Number of track patterns: 12
+Number of DEF vias:       0
+Number of components:     30378
+Number of terminals:      9
+Number of snets:          2
+Number of nets:           6629
+
+[INFO DRT-0167] List of default vias:
+  Layer via
+    default via: M1M2_PR
+  Layer via2
+    default via: M2M3_PR
+  Layer via3
+    default via: M3M4_PR
+  Layer via4
+    default via: M4M5_PR
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 217.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete FR_MASTERSLICE.
+[INFO DRT-0024]   Complete Fr_VIA.
+[INFO DRT-0024]   Complete li1.
+[INFO DRT-0024]   Complete mcon.
+[INFO DRT-0024]   Complete met1.
+[INFO DRT-0024]   Complete via.
+[INFO DRT-0024]   Complete met2.
+[INFO DRT-0024]   Complete via2.
+[INFO DRT-0024]   Complete met3.
+[INFO DRT-0024]   Complete via3.
+[INFO DRT-0024]   Complete met4.
+[INFO DRT-0024]   Complete via4.
+[INFO DRT-0024]   Complete met5.
+[INFO DRT-0033] FR_MASTERSLICE shape region query size = 0.
+[INFO DRT-0033] FR_VIA shape region query size = 0.
+[INFO DRT-0033] li1 shape region query size = 280837.
+[INFO DRT-0033] mcon shape region query size = 148352.
+[INFO DRT-0033] met1 shape region query size = 95925.
+[INFO DRT-0033] via shape region query size = 119585.
+[INFO DRT-0033] met2 shape region query size = 71828.
+[INFO DRT-0033] via2 shape region query size = 95650.
+[INFO DRT-0033] met3 shape region query size = 71766.
+[INFO DRT-0033] via3 shape region query size = 95644.
+[INFO DRT-0033] met4 shape region query size = 29571.
+[INFO DRT-0033] via4 shape region query size = 5461.
+[INFO DRT-0033] met5 shape region query size = 5691.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+.
+.
+.
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1
+[INFO DRT-0078]   Complete 1784 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 215 unique inst patterns.
+[INFO DRT-0084]   Complete 3686 groups.
+#scanned instances     = 30378
+#unique  instances     = 217
+#stdCellGenAp          = 6979
+#stdCellValidPlanarAp  = 73
+#stdCellValidViaAp     = 5131
+#stdCellPinNoAp        = 6
+#stdCellPinCnt         = 23186
+#instTermValidViaApCnt = 0
+#macroGenAp            = 1679
+#macroValidPlanarAp    = 1370
+#macroValidViaAp       = 81
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:06:36, elapsed time = 00:03:48, memory = 234.11 (MB), peak = 236.85 (MB)
+global_route -congestion_report_file ./reports/sky130hd/vsdbabysoc/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: met1
+[INFO GRT-0021] Max routing layer: met5
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer li1     Track-Pitch = 0.4600  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met1    Track-Pitch = 0.3400  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met2    Track-Pitch = 0.4600  line-2-Via Pitch: 0.3500
+[INFO GRT-0088] Layer met3    Track-Pitch = 0.6800  line-2-Via Pitch: 0.6150
+[INFO GRT-0088] Layer met4    Track-Pitch = 0.9200  line-2-Via Pitch: 1.0400
+[INFO GRT-0088] Layer met5    Track-Pitch = 3.4000  line-2-Via Pitch: 3.1100
+[INFO GRT-0003] Macros: 2
+[INFO GRT-0004] Blockages: 17305
+[INFO GRT-0019] Found 94 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 148
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+li1        Vertical            0            10          0.00%
+met1       Horizontal    1071378        459545          57.11%
+met2       Vertical       803418        399727          50.25%
+met3       Horizontal     535689        297307          44.50%
+met4       Vertical       322014        144702          55.06%
+met5       Horizontal     106953         41589          61.11%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0197] Via related to pin nodes: 44078
+[INFO GRT-0198] Via related Steiner nodes: 1182
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 58489
+[INFO GRT-0112] Final usage 3D: 228146
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+li1                 10             0            0.00%             0 /  0 /  0
+met1            459545         23092            5.02%             1 /  0 /  5
+met2            399727         15562            3.89%             0 /  1 /  7
+met3            297307         10939            3.68%             1 /  0 / 11
+met4            144702          2264            1.56%             0 /  1 /  4
+met5             41589           822            1.98%             1 /  0 /  5
+---------------------------------------------------------------------------------------
+Total          1342880         52679            3.92%             3 /  2 / 32
+
+[INFO GRT-0018] Total wirelength: 494454 um
+[INFO GRT-0014] Routed nets: 6595
+[ERROR GRT-0116] Global routing finished with congestion. Check the congestion regions in the DRC Viewer.
+Error: global_route.tcl, 120 GRT-0116
+Command exited with non-zero status 1
+Elapsed time: 4:00.74[h:]min:sec. CPU time: user 407.00 sys 3.59 (170%). Peak memory: 464952KB.
+make[1]: *** [Makefile:547: do-5_1_grt] Error 1
+make: *** [Makefile:547: results/sky130hd/vsdbabysoc/base/5_1_grt.odb] Error 2
+
+```
 
 
 
