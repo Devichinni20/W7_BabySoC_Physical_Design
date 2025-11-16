@@ -1359,7 +1359,7 @@ That comes from the static-timing tool (OpenSTA) saying it can’t find any .lib
 
 ### FIX
 
-1) Understand what files are required
+### 1) Understand what files are required
 
 LEF — technology and standard-cell geometry (needed to draw/layout cells).
 
@@ -1371,7 +1371,7 @@ DEF or GDS — your placed & routed design (DEF for placement/route info; GDS fo
 
 If you only want to see the floorplan/layout, LEF + DEF (or .odb / GDS) are enough. .lib files are required only for timing analysis and for OpenSTA to run without that error.
 
-2) Load the layout into the GUI (quick commands you can paste into the TCL / command tab)
+### 2) Load the layout into the GUI (quick commands you can paste into the TCL / command tab)
 
 Make sure the files exist in your Codespaces workspace and use their correct relative/absolute paths.
 
@@ -1404,7 +1404,7 @@ openroad -gui -exit <your_load_script.tcl>
 
 # where your_load_script.tcl contains the read_lef/read_def/read_liberty commands
 ```
-3) Fix the STA/liberty error (if you want timing too)
+### 3) Fix the STA/liberty error (if you want timing too)
 
 OpenSTA expects liberty files. Load them with a command like (TCL names can vary by toolchain, but read_liberty is common):
 ```bash
@@ -1419,7 +1419,7 @@ If you don't have them (Codespaces container / image may not include a PDK), dow
 
 If you don’t have liberty files and only want to view placement/floorplan, you can ignore STA errors — but the GUI prints the error repeatedly.
 
-4) Troubleshooting checklist
+### 4) Troubleshooting checklist
 
 Confirm files exist at the paths you used in Codespaces (ls path/to/...).
 
@@ -1431,7 +1431,7 @@ Make sure layers are enabled in the left “Layers” panel (checkboxes).
 
 If running in Codespaces via VNC/web UI, confirm the file system is correctly mounted and OpenROAD has permissions to read the files.
 
-5) Example minimal load script (load_design.tcl)
+### 5) Example minimal load script (load_design.tcl)
 
 Save this in your repo and run openroad -gui load_design.tcl:
 ```bash
