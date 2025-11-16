@@ -5,7 +5,7 @@ This repository launches a **ready-to-use GitHub Codespace** with OpenROAD tools
 It is designed for testing and learning **physical design (PD) flows** in a cloud-based environment — without needing any local installation.
 
 ---
-### What It Is
+### 🧩What It Is
 
 This repository provides a cloud-based environment (like GitHub Codespaces or VSCode in the browser) that runs:
 
@@ -16,7 +16,7 @@ XFCE Desktop – a lightweight Linux desktop environment
 noVNC – a browser-based remote desktop viewer
 
 So, instead of installing OpenROAD locally, you can run and view it directly in your browser.
-###  Why It’s Useful
+### 🔍 Why It’s Useful
 
 ✅ No need to install OpenROAD or GUI tools locally
 ✅ Works directly in your browser
