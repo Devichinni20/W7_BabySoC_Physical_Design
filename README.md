@@ -421,6 +421,17 @@ By adopting BS-PDNs, semiconductor manufacturers can develop high-performance an
 
 </details> 
 
+### 🚀 Project Overview
+
+This project demonstrates a full RTL-to-GDSII physical design flow using OpenROAD of BabySoC.
+The final output includes:
+
+*Floorplan
+*Placement
+*Clock Tree Synthesis
+*Routing
+*SPEF (Standard Parasitic Exchange Format) extraction
+*Post-route Static Timing Analysis
 
 ### MY PROJECT REPOSITORY LINK
 This project was developed using GitHub Codespaces.
@@ -1341,12 +1352,112 @@ read_db 2_1_floorplan.odb    -> in the tcl command inside gui
 
 <img width="1595" height="903" alt="Screenshot (494)" src="https://github.com/user-attachments/assets/8b3bc7e0-d235-4a2f-bfb0-b603015098bb" />
 
+### SPEF (Standard Parasitic Exchange Format) extraction
+It is a file that contains parasitic extraction information of your routed design — mainly:
+Resistance (R)
+Capacitance (C)
+Net connectivity
+Parasitic nodes created after routing
+
+SPEF is used for Post-Route Static Timing Analysis (STA) to get accurate timing numbers because after routing, wires have real RC delay.
+
+### ✅ What SPEF Contains (Simple Explanation)
+
+For each net in your design, SPEF stores:
+
+*Total capacitance of the net
+*Capacitance of each sub-node
+*Resistances between wire segments
+*Coupling capacitances between signals
+
+Example small snippet:
+
+```bash
+*D_NET N1 0.025
+*CAP
+1 N1 0.010
+2 N1 N2 0.015
+*RES
+1 N1 N1_1 50.0
+2 N1_1 N2 40.0
+```
+
+### ✅ Why SPEF Is Important
+
+After routing, wires create delay.
+SPEF gives actual delays to STA tools like OpenSTA or PrimeTime.
+
+Without SPEF → STA uses ideal wires → wrong timing.
+
+With SPEF → Real RC delay → accurate timing report.
+
+### 🚀 How to Generate SPEF in OpenROAD (exact steps)
+
+You should be at post-route stage (detailed routing completed).
+
+In the OpenROAD Tcl terminal, run:
+
+1️⃣ Load your design (DEF + LIB + SDC)
+
+Example:
+```bash
+read_lef tech.lef
+read_lef stdcell.lef
+read_def routed.def
+read_liberty typical.lib
+read_sdc design.sdc
+```
+
+2️⃣ Run the SPEF extraction
+
+OpenROAD command:
+```bash
+estimate_parasitics -spef design.spef
+```
+
+OR, in newer flows:
+```bash
+write_spef design.spef
+```
+3️⃣ Verify SPEF was generated
+```bash
+report_parasitics
+```
+
+You will see resistance and capacitance values per net.
+
+4️⃣ Use SPEF for Post-Route STA
+```bash
+read_spef design.spef
+report_checks -path_delay max
+report_tns
+report_wns
+```
+
+Now STA will show real timing after routing.
+
+### 🎯 Where to run the commands?
+
+Run inside OpenROAD Tcl command window (terminal inside GUI or openroad executable in shell).
+
+Not inside Linux terminal.
+Inside OpenROAD only.
 
 
+###  Post-Route STA
+```bash
+read_liberty tech/typical.lib
+read_sdc constraints/design.sdc
+read_spef results/design.spef
 
+report_checks -path_delay max
+report_tns
+report_wns
 
+```
+ Understanding how the generated SPEF is used for post-route STA in real design flows.
 
-
-
+-Developed an end-to-end understanding of how digital design data becomes a 
+physical chip ready for timing closure and sign-off.
 
 
