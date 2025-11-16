@@ -1337,7 +1337,6 @@ So the absence of .def is normal if the flow only produces ODB files.
 
 
 
-
 ### Solution
 ```bash
 
@@ -1351,6 +1350,114 @@ read_db 2_1_floorplan.odb    -> in the tcl command inside gui
 <img width="1599" height="920" alt="Screenshot (493)" src="https://github.com/user-attachments/assets/19820f3d-1ebf-466c-8090-f14127483479" />
 
 <img width="1595" height="903" alt="Screenshot (494)" src="https://github.com/user-attachments/assets/8b3bc7e0-d235-4a2f-bfb0-b603015098bb" />
+
+### ERROR
+```bash
+[ERROR STA-2141] No liberty libraries found.
+```
+That comes from the static-timing tool (OpenSTA) saying it can’t find any .lib timing files. That won’t let timing run, and if your design/tech LEF/DEF/GDS/ODB aren’t loaded the OpenROAD GUI will also show an empty/black canvas (no layout to draw).
+
+### FIX
+
+1) Understand what files are required
+
+LEF — technology and standard-cell geometry (needed to draw/layout cells).
+
+DEF or GDS — your placed & routed design (DEF for placement/route info; GDS for final masks).
+
+.odb — OpenROAD database produced by the flow (if you already ran the OpenROAD flow it produces an .odb you can open).
+
+.lib (Liberty) — timing library files for STA (OpenSTA). If STA is missing libs you’ll see STA-2141.
+
+If you only want to see the floorplan/layout, LEF + DEF (or .odb / GDS) are enough. .lib files are required only for timing analysis and for OpenSTA to run without that error.
+
+2) Load the layout into the GUI (quick commands you can paste into the TCL / command tab)
+
+Make sure the files exist in your Codespaces workspace and use their correct relative/absolute paths.
+
+Example minimal commands to show layout (DEF + LEF):
+```bash
+# read technology and standard cell LEF(s)
+read_lef path/to/tech.lef
+read_lef path/to/stdcells.lef
+
+# read your placed/routed DEF
+read_def path/to/top.def
+
+# or, if you have a GDS:
+# read_gds path/to/top.gds
+
+# then fit/zoom to see it
+select top
+fit
+
+```
+Or if you have an OpenROAD .odb produced by the flow, open it:
+```bash
+open_db path/to/top.odb
+fit
+```
+
+If you want to start OpenROAD and run a script that loads everything and then opens GUI:
+```bash
+openroad -gui -exit <your_load_script.tcl>
+
+# where your_load_script.tcl contains the read_lef/read_def/read_liberty commands
+```
+3) Fix the STA/liberty error (if you want timing too)
+
+OpenSTA expects liberty files. Load them with a command like (TCL names can vary by toolchain, but read_liberty is common):
+```bash
+read_liberty path/to/your_standard_cells.lib
+# or
+read_lib path/to/your_standard_cells.lib   ;# depending on your OpenROAD build
+```
+
+Liberty files come with the standard cell library / PDK. Point the script to the .lib files from your library (e.g., sky130_fd_sc_hd__tt_025C_1v80.lib or whatever PDK/library you use).
+
+If you don't have them (Codespaces container / image may not include a PDK), download/copy the library .lib files into your workspace or adjust the script to the correct path.
+
+If you don’t have liberty files and only want to view placement/floorplan, you can ignore STA errors — but the GUI prints the error repeatedly.
+
+4) Troubleshooting checklist
+
+Confirm files exist at the paths you used in Codespaces (ls path/to/...).
+
+If GUI still black: ensure you fit or zoom in/out (sometimes the view is off-screen).
+
+Check the TCL console for other errors when read_lef/read_def runs (missing layers, mismatch LEFs).
+
+Make sure layers are enabled in the left “Layers” panel (checkboxes).
+
+If running in Codespaces via VNC/web UI, confirm the file system is correctly mounted and OpenROAD has permissions to read the files.
+
+5) Example minimal load script (load_design.tcl)
+
+Save this in your repo and run openroad -gui load_design.tcl:
+```bash
+# load technology and cells
+read_lef ./pdk/tech.lef
+read_lef ./stdcells/stdcells.lef
+
+# load design
+read_def ./results/top.def
+
+# optional: read liberty for STA
+# read_liberty ./libs/sky130.lib
+
+# show it
+open_db ./results/top.odb
+fit
+
+```
+### FLOOR PLAN
+
+<img width="1033" height="637" alt="image" src="https://github.com/user-attachments/assets/59e370e1-601d-448a-acb4-cdada2209ecd" />
+
+### PLACE
+
+<img width="1023" height="632" alt="image" src="https://github.com/user-attachments/assets/89a1b05d-3384-49fd-9631-5f7de31dc4c9" />
+
 
 ### SPEF (Standard Parasitic Exchange Format) extraction
 It is a file that contains parasitic extraction information of your routed design — mainly:
@@ -1414,6 +1521,17 @@ OpenROAD command:
 ```bash
 estimate_parasitics -spef design.spef
 ```
+### HEAT MAP
+
+<img width="1026" height="605" alt="image" src="https://github.com/user-attachments/assets/6c69c0d7-a190-456d-a91f-2f337aaf832b" />
+<img width="1028" height="636" alt="image" src="https://github.com/user-attachments/assets/fb5de492-932f-4804-b969-8d7750632065" />
+<img width="1022" height="620" alt="image" src="https://github.com/user-attachments/assets/118aca67-2656-4aed-b875-22bf6907ca8c" />
+
+<img width="1029" height="619" alt="image" src="https://github.com/user-attachments/assets/65e0a860-2d72-496b-915c-64171f04c734" />
+<img width="1025" height="631" alt="image" src="https://github.com/user-attachments/assets/a46e742f-31bf-4a6c-8cd4-89db58f2e6fa" />
+
+
+
 
 OR, in newer flows:
 ```bash
@@ -1457,7 +1575,7 @@ report_wns
 ```
  Understanding how the generated SPEF is used for post-route STA in real design flows.
 
--Developed an end-to-end understanding of how digital design data becomes a 
+Thus Developed an end-to-end understanding of how digital design data becomes a 
 physical chip ready for timing closure and sign-off.
 
 
