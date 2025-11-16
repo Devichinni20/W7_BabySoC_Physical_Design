@@ -474,19 +474,26 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
 or
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
 ```
+
 ### SYNTHESIS
+
 <img width="1526" height="808" alt="Screenshot (461)" src="https://github.com/user-attachments/assets/56477bf9-fca1-4072-b1ab-37fc3c1327dc" />
 <img width="1529" height="815" alt="Screenshot (462)" src="https://github.com/user-attachments/assets/ba4609a8-2f8b-4d3f-a3ef-59e8ecb47eac" />
+
 ### FLOORPLAN
+
 <img width="1368" height="806" alt="Screenshot (464)" src="https://github.com/user-attachments/assets/6f4e0143-d4a2-4285-a3cf-9b7111ef7ad5" />
-
 <img width="1432" height="819" alt="Screenshot (465)" src="https://github.com/user-attachments/assets/07e4de19-be84-47f5-a767-bf4e3048c45c" />
-
 <img width="1420" height="800" alt="Screenshot (466)" src="https://github.com/user-attachments/assets/eb09327c-cccb-46fc-8d73-83d94304c106" />
+
 ### GLOBAL PLACE_REPORT_DESIGN_AREA
+
 <img width="1427" height="809" alt="Screenshot (467)" src="https://github.com/user-attachments/assets/9b17e642-95e7-47db-b938-a58550d26f86" />
+
 ### PLACEMENT ANALYSIS
+
 <img width="1445" height="809" alt="Screenshot (468)" src="https://github.com/user-attachments/assets/e9fd7254-7e2a-4f00-8a75-284ffd01048b" />
+
 ### CTS FINAL REPORT
 
 ```bash
