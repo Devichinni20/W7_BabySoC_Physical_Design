@@ -41,8 +41,8 @@ This VM includes:
 All required tools (like OpenROAD, Yosys, Magic, KLayout)
 A Linux desktop environment (XFCE)
 noVNC server setup for browser-based GUI access
- 
-  <img width="645" height="581" alt="image" src="https://github.com/user-attachments/assets/7d132733-bb55-46d0-9333-135bb219ade4" />
+ <img width="572" height="570" alt="image" src="https://github.com/user-attachments/assets/67978026-7374-4f7f-b66d-3815e77f3868" />
+
 
 2. Wait for the setup to complete.  
    The log will show: **“Finished configuring codespace.”**  
@@ -69,6 +69,7 @@ When the process finishes successfully, you’ll see a log summary similar to th
 <img width="966" height="238" alt="image" src="https://github.com/user-attachments/assets/1b61d93b-258b-4bac-9a9b-9b40bd94a526" />
 <img width="875" height="613" alt="image" src="https://github.com/user-attachments/assets/20711244-5143-448e-930f-1143d7e7c186" />
 
+
 ## Access the GUI via noVNC
 
 1. Open the **PORTS** tab in the Codespace.
@@ -85,7 +86,8 @@ When the process finishes successfully, you’ll see a log summary similar to th
 #   yourusername → your GitHub username
 #   xxxx → the unique Codespace ID
 ```
-    <img width="1670" height="319" alt="image" src="https://github.com/user-attachments/assets/c43fb369-e517-4db2-9e3c-a4dbd0b04756" />
+   
+<img width="1670" height="319" alt="image" src="https://github.com/user-attachments/assets/c43fb369-e517-4db2-9e3c-a4dbd0b04756" />    
 
 You’ll see the browser-based desktop environment:
 <img width="397" height="317" alt="image" src="https://github.com/user-attachments/assets/e6b8ee9d-db76-4fe6-a251-d3a5736fb462" />
@@ -176,15 +178,14 @@ Initial Steps:
          │    └── vsdbabysoc/
          └── src/
               └── vsdbabysoc/
-     ```
+   ```
 
 
 Step1-
 ```bash
 cd ~/Desktop
 git clone https://github.com/your-username/VSDBabySoC.git
-```
-    
+```   
 ```bash
      cp -r VSDBabySoC/gds OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/
      cp -r VSDBabySoC/include OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/
@@ -220,7 +221,7 @@ OpenROAD-flow-scripts
 ```
 2️⃣ Inside the **vsdbabysoc** folder, click **“New File”**.
 
-3️⃣ Name the file:
+3️⃣ Name the file
 
 4️⃣ Paste the entire `config.mk` content into this file and save it.
 
@@ -330,11 +331,11 @@ make
 This executes the full OpenROAD physical design flow, which includes:
 
 -Logic synthesis (Yosys)
--Floorplanning
--Placement
--Clock tree synthesis
--Routing
--GDSII generation
+->Floorplanning
+->Placement
+->Clock tree synthesis
+->Routing
+->GDSII generation
 
 All of this uses the Nangate45 PDK (Process Design Kit) —
 that’s the 45nm open-source standard-cell library used for educational PD flows.
@@ -354,6 +355,9 @@ You will see something like:
 all: run_flow
 ```
 which explains why default target = full flow.
+
+<img width="1465" height="398" alt="Screenshot (453)" src="https://github.com/user-attachments/assets/b4ee3841-90ee-4c37-87b7-49f8b7944a85" />
+
 
 ### ERROR
 ```bash
@@ -426,6 +430,12 @@ make[1]: *** [Makefile:262: do-yosys] Error 1
 make: *** [Makefile:272: results/sky130hd/vsdbabysoc/base/1_2_yosys.v] Error 2
 again this error
 ```
+
+
+<img width="1538" height="808" alt="Screenshot (463)" src="https://github.com/user-attachments/assets/0bcdbd72-858b-4fe5-a042-cf32083b3ae1" />
+
+
+
 SOLUTION-
 Your config file has:
 ```bash
@@ -461,7 +471,202 @@ If anything missing → synthesis will fail.
 ### 🚀 Now run synthesis
 ```bash
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
+or
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
 ```
+### SYNTHESIS
+<img width="1526" height="808" alt="Screenshot (461)" src="https://github.com/user-attachments/assets/56477bf9-fca1-4072-b1ab-37fc3c1327dc" />
+<img width="1529" height="815" alt="Screenshot (462)" src="https://github.com/user-attachments/assets/ba4609a8-2f8b-4d3f-a3ef-59e8ecb47eac" />
+### FLOORPLAN
+<img width="1368" height="806" alt="Screenshot (464)" src="https://github.com/user-attachments/assets/6f4e0143-d4a2-4285-a3cf-9b7111ef7ad5" />
+
+<img width="1432" height="819" alt="Screenshot (465)" src="https://github.com/user-attachments/assets/07e4de19-be84-47f5-a767-bf4e3048c45c" />
+
+<img width="1420" height="800" alt="Screenshot (466)" src="https://github.com/user-attachments/assets/eb09327c-cccb-46fc-8d73-83d94304c106" />
+### GLOBAL PLACE_REPORT_DESIGN_AREA
+<img width="1427" height="809" alt="Screenshot (467)" src="https://github.com/user-attachments/assets/9b17e642-95e7-47db-b938-a58550d26f86" />
+### PLACEMENT ANALYSIS
+<img width="1445" height="809" alt="Screenshot (468)" src="https://github.com/user-attachments/assets/e9fd7254-7e2a-4f00-8a75-284ffd01048b" />
+### CTS FINAL REPORT
+
+```bash
+
+vscode@codespaces-f73089:/workspaces/vsd-pd$ cd /workspaces/vsd-pd/OpenROAD-flow-scripts/flow
+vscode@codespaces-f73089:/workspaces/vsd-pd/OpenROAD-flow-scripts/flow$ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk 
+/workspaces/vsd-pd/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+read_liberty /workspaces/vsd-pd/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_db ./results/sky130hd/vsdbabysoc/base/4_cts.odb
+[INFO DRT-0149] Reading tech and libs.
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+
+Units:                1000
+Number of layers:     13
+Number of macros:     443
+Number of vias:       30
+Number of viarulegen: 25
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net571 has 148 pins which may impact routing performance. Consider optimization.
+
+Design:                   vsdbabysoc
+Die area:                 ( 0 0 ) ( 1600000 1600000 )
+Number of track patterns: 12
+Number of DEF vias:       0
+Number of components:     30378
+Number of terminals:      9
+Number of snets:          2
+Number of nets:           6629
+
+[INFO DRT-0167] List of default vias:
+  Layer via
+    default via: M1M2_PR
+  Layer via2
+    default via: M2M3_PR
+  Layer via3
+    default via: M3M4_PR
+  Layer via4
+    default via: M4M5_PR
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 217.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete FR_MASTERSLICE.
+[INFO DRT-0024]   Complete Fr_VIA.
+[INFO DRT-0024]   Complete li1.
+[INFO DRT-0024]   Complete mcon.
+[INFO DRT-0024]   Complete met1.
+[INFO DRT-0024]   Complete via.
+[INFO DRT-0024]   Complete met2.
+[INFO DRT-0024]   Complete via2.
+[INFO DRT-0024]   Complete met3.
+[INFO DRT-0024]   Complete via3.
+[INFO DRT-0024]   Complete met4.
+[INFO DRT-0024]   Complete via4.
+[INFO DRT-0024]   Complete met5.
+[INFO DRT-0033] FR_MASTERSLICE shape region query size = 0.
+[INFO DRT-0033] FR_VIA shape region query size = 0.
+[INFO DRT-0033] li1 shape region query size = 280837.
+[INFO DRT-0033] mcon shape region query size = 148352.
+[INFO DRT-0033] met1 shape region query size = 95925.
+[INFO DRT-0033] via shape region query size = 119585.
+[INFO DRT-0033] met2 shape region query size = 71828.
+[INFO DRT-0033] via2 shape region query size = 95650.
+[INFO DRT-0033] met3 shape region query size = 71766.
+[INFO DRT-0033] via3 shape region query size = 95644.
+[INFO DRT-0033] met4 shape region query size = 29571.
+[INFO DRT-0033] via4 shape region query size = 5461.
+[INFO DRT-0033] met5 shape region query size = 5691.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+.
+.
+.
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1 polygon
+[WARNING DRT-6000] Macro pin has more than 1
+[INFO DRT-0078]   Complete 1784 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 215 unique inst patterns.
+[INFO DRT-0084]   Complete 3686 groups.
+#scanned instances     = 30378
+#unique  instances     = 217
+#stdCellGenAp          = 6979
+#stdCellValidPlanarAp  = 73
+#stdCellValidViaAp     = 5131
+#stdCellPinNoAp        = 6
+#stdCellPinCnt         = 23186
+#instTermValidViaApCnt = 0
+#macroGenAp            = 1679
+#macroValidPlanarAp    = 1370
+#macroValidViaAp       = 81
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:06:36, elapsed time = 00:03:48, memory = 234.11 (MB), peak = 236.85 (MB)
+global_route -congestion_report_file ./reports/sky130hd/vsdbabysoc/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: met1
+[INFO GRT-0021] Max routing layer: met5
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer li1     Track-Pitch = 0.4600  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met1    Track-Pitch = 0.3400  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met2    Track-Pitch = 0.4600  line-2-Via Pitch: 0.3500
+[INFO GRT-0088] Layer met3    Track-Pitch = 0.6800  line-2-Via Pitch: 0.6150
+[INFO GRT-0088] Layer met4    Track-Pitch = 0.9200  line-2-Via Pitch: 1.0400
+[INFO GRT-0088] Layer met5    Track-Pitch = 3.4000  line-2-Via Pitch: 3.1100
+[INFO GRT-0003] Macros: 2
+[INFO GRT-0004] Blockages: 17305
+[INFO GRT-0019] Found 94 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 148
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+li1        Vertical            0            10          0.00%
+met1       Horizontal    1071378        459545          57.11%
+met2       Vertical       803418        399727          50.25%
+met3       Horizontal     535689        297307          44.50%
+met4       Vertical       322014        144702          55.06%
+met5       Horizontal     106953         41589          61.11%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0197] Via related to pin nodes: 44078
+[INFO GRT-0198] Via related Steiner nodes: 1182
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 58489
+[INFO GRT-0112] Final usage 3D: 228146
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+li1                 10             0            0.00%             0 /  0 /  0
+met1            459545         23092            5.02%             1 /  0 /  5
+met2            399727         15562            3.89%             0 /  1 /  7
+met3            297307         10939            3.68%             1 /  0 / 11
+met4            144702          2264            1.56%             0 /  1 /  4
+met5             41589           822            1.98%             1 /  0 /  5
+---------------------------------------------------------------------------------------
+Total          1342880         52679            3.92%             3 /  2 / 32
+
+[INFO GRT-0018] Total wirelength: 494454 um
+[INFO GRT-0014] Routed nets: 6595
+[ERROR GRT-0116] Global routing finished with congestion. Check the congestion regions in the DRC Viewer.
+Error: global_route.tcl, 120 GRT-0116
+Command exited with non-zero status 1
+Elapsed time: 4:00.74[h:]min:sec. CPU time: user 407.00 sys 3.59 (170%). Peak memory: 464952KB.
+make[1]: *** [Makefile:547: do-5_1_grt] Error 1
+make: *** [Makefile:547: results/sky130hd/vsdbabysoc/base/5_1_grt.odb] Error 2
+
+```
+
+<img width="1431" height="793" alt="Screenshot (469)" src="https://github.com/user-attachments/assets/8a6e7be6-896c-4955-986a-0eeb205a19ad" />
+
+<img width="1452" height="807" alt="Screenshot (470)" src="https://github.com/user-attachments/assets/6686ede5-50ee-401a-acc1-b94072a20d33" />
+<img width="1431" height="821" alt="Screenshot (471)" src="https://github.com/user-attachments/assets/173c729c-2996-48c9-beeb-ec54d87fac96" />
+
 ### ERROR
 ```bash
 [INFO GRT-0018] Total wirelength: 494454 um
@@ -474,12 +679,19 @@ make[1]: *** [Makefile:547: do-5_1_grt] Error 1
 make: *** [Makefile:547: results/sky130hd/vsdbabysoc/base/5_1_grt.odb] Error 2
 error after cts
 ```
+
  Completed CTS, but global routing failed due to congestion:
 ```bash
 [ERROR GRT-0116] Global routing finished with congestion.
 ```
 You hit a GRT-0116: Global Routing Congestion error after CTS.
 This is very common for SoC-scale designs like BabySoC on Sky130HD, especially when the floorplan is too tight or macros are blocking routing channels.
+
+<img width="1461" height="815" alt="Screenshot (474)" src="https://github.com/user-attachments/assets/b21595df-5467-4c64-a1ae-0ceca44ac013" />
+<img width="1507" height="802" alt="Screenshot (475)" src="https://github.com/user-attachments/assets/cd6637dd-143b-46e7-8636-1cafc89b0f5d" />
+
+<img width="1395" height="811" alt="Screenshot (476)" src="https://github.com/user-attachments/assets/ffe7cdd3-7bf8-44e4-b739-e2d727cc1f50" />
+
 
 
 ### Why congestion happens after CTS
@@ -662,6 +874,20 @@ ky130hd/vsdbabysoc/base$ ls
 
 So the absence of .def is normal if the flow only produces ODB files.
 
+<img width="1421" height="801" alt="Screenshot (478)" src="https://github.com/user-attachments/assets/ad99d079-ee69-4376-a46f-934d27de1966" />
+
+<img width="1593" height="920" alt="Screenshot (480)" src="https://github.com/user-attachments/assets/d2e32d31-d8ce-4a97-8b16-a864e36632d2" />
+<img width="1595" height="927" alt="Screenshot (481)" src="https://github.com/user-attachments/assets/74ee46d5-5ed8-4988-9356-09f29e304046" />
+<img width="1588" height="931" alt="Screenshot (484)" src="https://github.com/user-attachments/assets/f24002f2-0e28-4914-a0c9-98c1750d620f" />
+
+### ERRORS
+<img width="1603" height="925" alt="Screenshot (490)" src="https://github.com/user-attachments/assets/45cb0585-a2ee-425a-b00d-abb3cb0f59fa" />
+
+<img width="1601" height="921" alt="Screenshot (491)" src="https://github.com/user-attachments/assets/5ace33be-0bd9-4042-8e95-83eca48e6ee8" />
+
+
+
+
 ### Solution
 ```bash
 
@@ -670,181 +896,11 @@ read_db 2_1_floorplan.odb    -> in the tcl command inside gui
 
 ```
 
-### CTS-FINAL REPORT
-```bash
+<img width="1595" height="918" alt="Screenshot (492)" src="https://github.com/user-attachments/assets/4bba1809-59b7-4b09-9396-9644e7481c33" />
 
-vscode@codespaces-f73089:/workspaces/vsd-pd$ cd /workspaces/vsd-pd/OpenROAD-flow-scripts/flow
-vscode@codespaces-f73089:/workspaces/vsd-pd/OpenROAD-flow-scripts/flow$ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk 
-/workspaces/vsd-pd/OpenROAD-flow-scripts/flow/scripts/flow.sh 5_1_grt global_route
-Running global_route.tcl, stage 5_1_grt
-read_liberty /workspaces/vsd-pd/OpenROAD-flow-scripts/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-read_db ./results/sky130hd/vsdbabysoc/base/4_cts.odb
-[INFO DRT-0149] Reading tech and libs.
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer mcon
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via2
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via3
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
-[WARNING DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer via4
+<img width="1599" height="920" alt="Screenshot (493)" src="https://github.com/user-attachments/assets/19820f3d-1ebf-466c-8090-f14127483479" />
 
-Units:                1000
-Number of layers:     13
-Number of macros:     443
-Number of vias:       30
-Number of viarulegen: 25
-
-[INFO DRT-0150] Reading design.
-[WARNING DRT-0120] Large net net571 has 148 pins which may impact routing performance. Consider optimization.
-
-Design:                   vsdbabysoc
-Die area:                 ( 0 0 ) ( 1600000 1600000 )
-Number of track patterns: 12
-Number of DEF vias:       0
-Number of components:     30378
-Number of terminals:      9
-Number of snets:          2
-Number of nets:           6629
-
-[INFO DRT-0167] List of default vias:
-  Layer via
-    default via: M1M2_PR
-  Layer via2
-    default via: M2M3_PR
-  Layer via3
-    default via: M3M4_PR
-  Layer via4
-    default via: M4M5_PR
-[INFO DRT-0162] Library cell analysis.
-[INFO DRT-0163] Instance analysis.
-[INFO DRT-0164] Number of unique instances = 217.
-[INFO DRT-0168] Init region query.
-[INFO DRT-0024]   Complete FR_MASTERSLICE.
-[INFO DRT-0024]   Complete Fr_VIA.
-[INFO DRT-0024]   Complete li1.
-[INFO DRT-0024]   Complete mcon.
-[INFO DRT-0024]   Complete met1.
-[INFO DRT-0024]   Complete via.
-[INFO DRT-0024]   Complete met2.
-[INFO DRT-0024]   Complete via2.
-[INFO DRT-0024]   Complete met3.
-[INFO DRT-0024]   Complete via3.
-[INFO DRT-0024]   Complete met4.
-[INFO DRT-0024]   Complete via4.
-[INFO DRT-0024]   Complete met5.
-[INFO DRT-0033] FR_MASTERSLICE shape region query size = 0.
-[INFO DRT-0033] FR_VIA shape region query size = 0.
-[INFO DRT-0033] li1 shape region query size = 280837.
-[INFO DRT-0033] mcon shape region query size = 148352.
-[INFO DRT-0033] met1 shape region query size = 95925.
-[INFO DRT-0033] via shape region query size = 119585.
-[INFO DRT-0033] met2 shape region query size = 71828.
-[INFO DRT-0033] via2 shape region query size = 95650.
-[INFO DRT-0033] met3 shape region query size = 71766.
-[INFO DRT-0033] via3 shape region query size = 95644.
-[INFO DRT-0033] met4 shape region query size = 29571.
-[INFO DRT-0033] via4 shape region query size = 5461.
-[INFO DRT-0033] met5 shape region query size = 5691.
-[INFO DRT-0165] Start pin access.
-[INFO DRT-0076]   Complete 1000 pins.
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-.
-.
-.
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1 polygon
-[WARNING DRT-6000] Macro pin has more than 1
-[INFO DRT-0078]   Complete 1784 pins.
-[INFO DRT-0079]   Complete 100 unique inst patterns.
-[INFO DRT-0079]   Complete 200 unique inst patterns.
-[INFO DRT-0081]   Complete 215 unique inst patterns.
-[INFO DRT-0084]   Complete 3686 groups.
-#scanned instances     = 30378
-#unique  instances     = 217
-#stdCellGenAp          = 6979
-#stdCellValidPlanarAp  = 73
-#stdCellValidViaAp     = 5131
-#stdCellPinNoAp        = 6
-#stdCellPinCnt         = 23186
-#instTermValidViaApCnt = 0
-#macroGenAp            = 1679
-#macroValidPlanarAp    = 1370
-#macroValidViaAp       = 81
-#macroNoAp             = 0
-[INFO DRT-0166] Complete pin access.
-[INFO DRT-0267] cpu time = 00:06:36, elapsed time = 00:03:48, memory = 234.11 (MB), peak = 236.85 (MB)
-global_route -congestion_report_file ./reports/sky130hd/vsdbabysoc/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
-[INFO GRT-0020] Min routing layer: met1
-[INFO GRT-0021] Max routing layer: met5
-[INFO GRT-0022] Global adjustment: 0%
-[INFO GRT-0023] Grid origin: (0, 0)
-[INFO GRT-0088] Layer li1     Track-Pitch = 0.4600  line-2-Via Pitch: 0.3400
-[INFO GRT-0088] Layer met1    Track-Pitch = 0.3400  line-2-Via Pitch: 0.3400
-[INFO GRT-0088] Layer met2    Track-Pitch = 0.4600  line-2-Via Pitch: 0.3500
-[INFO GRT-0088] Layer met3    Track-Pitch = 0.6800  line-2-Via Pitch: 0.6150
-[INFO GRT-0088] Layer met4    Track-Pitch = 0.9200  line-2-Via Pitch: 1.0400
-[INFO GRT-0088] Layer met5    Track-Pitch = 3.4000  line-2-Via Pitch: 3.1100
-[INFO GRT-0003] Macros: 2
-[INFO GRT-0004] Blockages: 17305
-[INFO GRT-0019] Found 94 clock nets.
-[INFO GRT-0001] Minimum degree: 2
-[INFO GRT-0002] Maximum degree: 148
-
-[INFO GRT-0053] Routing resources analysis:
-          Routing      Original      Derated      Resource
-Layer     Direction    Resources     Resources    Reduction (%)
----------------------------------------------------------------
-li1        Vertical            0            10          0.00%
-met1       Horizontal    1071378        459545          57.11%
-met2       Vertical       803418        399727          50.25%
-met3       Horizontal     535689        297307          44.50%
-met4       Vertical       322014        144702          55.06%
-met5       Horizontal     106953         41589          61.11%
----------------------------------------------------------------
-
-[INFO GRT-0101] Running extra iterations to remove overflow.
-[INFO GRT-0197] Via related to pin nodes: 44078
-[INFO GRT-0198] Via related Steiner nodes: 1182
-[INFO GRT-0199] Via filling finished.
-[INFO GRT-0111] Final number of vias: 58489
-[INFO GRT-0112] Final usage 3D: 228146
-
-[INFO GRT-0096] Final congestion report:
-Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
----------------------------------------------------------------------------------------
-li1                 10             0            0.00%             0 /  0 /  0
-met1            459545         23092            5.02%             1 /  0 /  5
-met2            399727         15562            3.89%             0 /  1 /  7
-met3            297307         10939            3.68%             1 /  0 / 11
-met4            144702          2264            1.56%             0 /  1 /  4
-met5             41589           822            1.98%             1 /  0 /  5
----------------------------------------------------------------------------------------
-Total          1342880         52679            3.92%             3 /  2 / 32
-
-[INFO GRT-0018] Total wirelength: 494454 um
-[INFO GRT-0014] Routed nets: 6595
-[ERROR GRT-0116] Global routing finished with congestion. Check the congestion regions in the DRC Viewer.
-Error: global_route.tcl, 120 GRT-0116
-Command exited with non-zero status 1
-Elapsed time: 4:00.74[h:]min:sec. CPU time: user 407.00 sys 3.59 (170%). Peak memory: 464952KB.
-make[1]: *** [Makefile:547: do-5_1_grt] Error 1
-make: *** [Makefile:547: results/sky130hd/vsdbabysoc/base/5_1_grt.odb] Error 2
-
-```
-
-
+<img width="1595" height="903" alt="Screenshot (494)" src="https://github.com/user-attachments/assets/8b3bc7e0-d235-4a2f-bfb0-b603015098bb" />
 
 
 
