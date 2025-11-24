@@ -911,11 +911,10 @@ avsddac.v
 If anything missing → synthesis will fail.
 
 
-### 🚀 Now run synthesis
+### 🚀 Now run the Entire Flow-RTL2GDSII
 ```bash
-make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
-or
-make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.tcl
+make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk
+
 ```
 
 ### SYNTHESIS
