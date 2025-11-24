@@ -1387,14 +1387,6 @@ OpenROAD command:
 ```bash
 estimate_parasitics -spef design.spef
 ```
-### HEAT MAP
-
-<img width="1026" height="605" alt="image" src="https://github.com/user-attachments/assets/6c69c0d7-a190-456d-a91f-2f337aaf832b" />
-<img width="1028" height="636" alt="image" src="https://github.com/user-attachments/assets/fb5de492-932f-4804-b969-8d7750632065" />
-<img width="1022" height="620" alt="image" src="https://github.com/user-attachments/assets/118aca67-2656-4aed-b875-22bf6907ca8c" />
-
-<img width="1029" height="619" alt="image" src="https://github.com/user-attachments/assets/65e0a860-2d72-496b-915c-64171f04c734" />
-<img width="1025" height="631" alt="image" src="https://github.com/user-attachments/assets/a46e742f-31bf-4a6c-8cd4-89db58f2e6fa" />
 
 
 
